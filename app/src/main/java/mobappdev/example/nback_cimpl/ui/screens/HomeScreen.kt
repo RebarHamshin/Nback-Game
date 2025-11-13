@@ -73,13 +73,13 @@ fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                // 🔊 AUDIO GAME BUTTON
+
                 Button(
                     onClick = {
-                        vm.stopGame()                // Stoppa ev. gammalt spel
+                        vm.stopGame()
                         vm.setGameType(GameType.Audio)
-                        vm.startGame()               // Starta nytt
-                        onStartAudio()               // Navigera
+                        vm.startGame()
+                        onStartAudio()
                     }
                 ) {
                     Icon(
@@ -91,7 +91,6 @@ fun HomeScreen(
                     )
                 }
 
-                // 👁 VISUAL GAME BUTTON
                 Button(
                     onClick = {
                         vm.stopGame()
