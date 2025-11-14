@@ -31,7 +31,7 @@ fun GameScreen(
     onBack: () -> Unit
 ) {
     LaunchedEffect(mode) {
-        val type = when (mode.lowercase()) {
+        val type = when (mode.lowercase()) { //ENUM loop som kollar gamemode
             "visual" -> GameType.Visual
             "audio" -> GameType.Audio
             "audiovisual" -> GameType.AudioVisual
@@ -43,7 +43,7 @@ fun GameScreen(
     val state = vm.gameState.collectAsState().value
     val score = vm.score.collectAsState().value
 
-    val modeLabel = when (state.gameType) {
+    val modeLabel = when (state.gameType) { //Skriver gamemode i spelet
         GameType.Visual -> "Visual"
         GameType.Audio -> "Audio"
         GameType.AudioVisual -> "Audio + Visual"
@@ -70,7 +70,7 @@ fun GameScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
+                    Text( //Text that shows current round
                         "Round: ${state.currentRound} / ${state.totalRounds}",
                         style = MaterialTheme.typography.headlineSmall
                     )
@@ -99,12 +99,12 @@ fun GameScreen(
             Spacer(Modifier.height(20.dp))
 
             when (state.gameType) {
-                GameType.Visual -> VisualStimulus(state.eventValue)
+                GameType.Visual -> VisualStimulus(state.eventValue) //ritar 3x3
 
                 GameType.Audio ->
                     AudioStimulus(
-                        value = state.eventValue,
-                        trigger = state.currentIndex
+                        value = state.eventValue, //A-I
+                        trigger = state.currentIndex //TTS
                     )
 
                 GameType.AudioVisual -> Column(
@@ -144,11 +144,11 @@ fun GameScreen(
                 }
             )
 
-            val buttonScale by animateFloatAsState(
+            val buttonScale by animateFloatAsState( //Makes buttton bigger if incorrect
                 if (transientFeedback == false) 1.1f else 1f
             )
 
-            Button(
+            Button( //Matchbutton
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(0.7f)
@@ -158,8 +158,8 @@ fun GameScreen(
                     ),
                 colors = ButtonDefaults.buttonColors(buttonColor),
                 onClick = {
-                    vm.checkMatch()
-                    pressCounter++
+                    vm.checkMatch() //Check if correct or not
+                    pressCounter++ //Triggers feedback
                 }
             ) {
                 Text("Match!")

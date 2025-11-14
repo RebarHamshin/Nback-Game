@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-@Composable
+@Composable //Shows a 3x3 grid
 fun VisualStimulus(value: Int) {
     val activeIndex = value - 1
 
@@ -43,7 +43,7 @@ fun VisualStimulus(value: Int) {
     }
 }
 
-@Composable
+@Composable //Plays audio
 fun AudioStimulus(
     value: Int,
     trigger: Int

@@ -17,7 +17,7 @@ import mobappdev.example.nback_cimpl.GameApplication
 import mobappdev.example.nback_cimpl.NBackHelper
 import mobappdev.example.nback_cimpl.data.UserPreferencesRepository
 
-interface GameViewModel {
+interface GameViewModel { //Defines all functions GameVM has
     val gameState: StateFlow<GameState>
     val score: StateFlow<Int>
     val highscore: StateFlow<Int>
@@ -35,7 +35,7 @@ class GameVM(
 
 
 
-    private val _gameState = MutableStateFlow(GameState())
+    private val _gameState = MutableStateFlow(GameState()) //Cannot be modified by UI
     override val gameState: StateFlow<GameState> get() = _gameState.asStateFlow()
 
     private val _score = MutableStateFlow(0)
@@ -46,11 +46,11 @@ class GameVM(
 
     override val nBack: Int = 2
 
-    private var job: Job? = null
+    private var job: Job? = null // for the gameloop
     private val eventInterval = 2000L
 
     private val nBackHelper = NBackHelper()
-    private var events: Array<Int> = emptyArray()
+    private var events: Array<Int> = emptyArray() //Stores Sequence from NBackHelper
 
 
 
@@ -59,7 +59,7 @@ class GameVM(
     }
 
     override fun startGame() {
-        stopGame()
+        stopGame() //Fixes the dual game bug
 
         _score.value = 0
 
@@ -70,7 +70,7 @@ class GameVM(
             nBack
         ).toList().toTypedArray()
 
-        _gameState.value = _gameState.value.copy(
+        _gameState.value = _gameState.value.copy( //Starts new game
             currentRound = 0,
             currentIndex = 0,
             totalRounds = events.size,
@@ -98,7 +98,7 @@ class GameVM(
 
         var correct = false
 
-        if (index >= nBack) {
+        if (index >= nBack) { //Checks if correct
             val curr = events[index]
             val prev = events[index - nBack]
             if (curr == prev) {
@@ -195,7 +195,7 @@ enum class GameType {
     AudioVisual
 }
 
-data class GameState(
+data class GameState( //Data for the UI
     val gameType: GameType = GameType.Visual,
     val eventValue: Int = -1,
     val currentIndex: Int = 0,

@@ -18,8 +18,8 @@ import mobappdev.example.nback_cimpl.ui.viewmodels.GameViewModel
 @Composable
 fun HomeScreen(
     vm: GameViewModel,
-    onStartVisual: () -> Unit,
-    onStartAudio: () -> Unit
+    onStartVisual: () -> Unit,//To GameScreen
+    onStartAudio: () -> Unit //To GameScreen
 ) {
     val highscore by vm.highscore.collectAsState()
     val gameState by vm.gameState.collectAsState()
